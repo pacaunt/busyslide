@@ -45,11 +45,28 @@
     #import "@preview/mannot:0.3.2": *
     #show: pause 
     $ a^2 + b^2 = markhl(c^2) $
+
+    Highlight 
+    $
+      mathrect(integral_0^oo e^(-x^2) dif x &= sqrt(pi)/2)
+    $
+
+    
+]
+
+== Alchemist 
+
+#slide[
+    #skeletize({
+        single(1)
+        fragment("CH_3")
+        single(-1)
+    })
 ]
 
 
 = Last Section
 
 #slide[
-
+ 
 ]

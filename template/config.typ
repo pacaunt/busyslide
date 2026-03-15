@@ -5,6 +5,7 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node 
 #import "@preview/rowmantic:0.5.0" as rowmantic: rowtable, rowgrid 
 #import "@preview/gentle-clues:1.3.1" as gc
+#import "@preview/alchemist:0.1.8": * 
 
 // Configuation Styles
 #let info = (
@@ -21,8 +22,21 @@
     dark: luma(30),
   ),
   main-font: "TeX Gyre Termes",
-  math-font: "TeX Gyre Termes Math",
+  math-font: "XITS Math",
   progressive-outline-args: (
     separator: "  >  ",
   ),
 )
+
+#let bond-wrapper(func) = (..args) => {
+  if args.pos() != () { func(angle: args.pos().first(), ..args.named()) } else { func(..args) }
+}
+
+#let (single, double, triple, cram-dashed-left, cram-dashed-right, cram-filled-left, cram-filled-right) = (single, double, triple, cram-dashed-left, cram-dashed-right, cram-filled-left, cram-filled-right).map(bond-wrapper)
+
+#let skeletize = skeletize-config((
+  atom-sep: 1.5cm,
+  angle-increment: 30deg, 
+))
+
+#let mathrect(body) = rect(math.equation(block: true, body))
