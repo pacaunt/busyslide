@@ -7,10 +7,10 @@
 
 // Configuation Styles
 #let info = (
-  title: "Nature Template",
-  description: "Some cool description about this presentation",
-  author: "John Doe",
-  date: datetime.today().display(),
+  title: "Atoms & Elements",
+  description: "อะตอมและสมบัติของธาตุ",
+  author: "แทน SIIT 32",
+  date: datetime.today().display("[Month repr:long] [year]"),
   image: block(width: 100%, height: 100%, fill: luma(230)),
   palette: (
     primary: teal.mix(luma(20)),
