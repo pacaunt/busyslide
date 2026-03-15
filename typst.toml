@@ -1,0 +1,29 @@
+[package]
+name = "busyslide"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["pacaunt"]
+description = "A collection of modern designed presentation template built on Presentate"
+homepage = "https://github.com/pacaunt/busyslide"
+repository = "https://github.com/pacaunt/busyslide"
+keywords = [
+    "presentation",
+    "pre",
+    "slide",
+    "deck",
+]
+categories = ["presentation"]
+disciplines = [
+    "business",
+    "chemistry",
+    "design",
+    "education",
+]
+compiler = "0.14.0"
+
+[template]
+path = "template"
+entrypoint = "template/main.typ"
+thumbnail = "template/thumbnail.png"
+
+[tool]
