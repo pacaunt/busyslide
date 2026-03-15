@@ -1,24 +1,5 @@
 #import "@local/busyslide:0.1.0": *
-
-#let info = (
-  title: "Nature Template",
-  description: "Some cool description about this presentation",
-  author: "John Doe",
-  date: datetime.today().display(),
-  image: block(width: 100%, height: 100%, fill: luma(230)),
-  palette: (
-    primary: teal.mix(luma(20)),
-    secondary: teal.mix(luma(200)),
-    light: gray,
-    accent: orange,
-    dark: luma(30),
-  ),
-  main-font: "TeX Gyre Termes",
-  math-font: "TeX Gyre Termes Math",
-  progressive-outline-args: (
-    separator: "  >  ",
-  ),
-)
+#import "../config.typ": *
 
 #let title-slide(info: info) = general-title-slide({
   import components: *

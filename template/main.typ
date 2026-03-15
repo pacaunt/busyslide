@@ -1,14 +1,9 @@
-// For a smooth experience
-#import "@preview/pariman:0.2.2": * 
-#import "@preview/chemformula:0.1.2": ch 
-#import "@preview/cetz:0.4.2" as cetz: draw, canvas 
-#import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node 
-#import "@preview/rowmantic:0.5.0" as rowmantic: rowtable, rowgrid 
-// main template 
 #import "themes/nature.typ": * 
 
 #let mock-image = block.with(width: 100%, height: 1fr, fill: gray.lighten(50%))
+
 #show: styler
+#show regex("\p{thai}+"): set text(font: "IBM Plex Sans Thai")
 
 #title-slide()
 
