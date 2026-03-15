@@ -4,6 +4,7 @@
 #import "@preview/cetz:0.4.2" as cetz: draw, canvas 
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, edge, node 
 #import "@preview/rowmantic:0.5.0" as rowmantic: rowtable, rowgrid 
+#import "@preview/gentle-clues:1.3.1" as gc
 
 // Configuation Styles
 #let info = (
