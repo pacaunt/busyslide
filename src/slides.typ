@@ -1,5 +1,5 @@
 #import "dependencies.typ": *
-#import "components.typ": element, slide-title
+#import "components.typ": element, slide-title, select
 
 #let general-slide(title: auto, body, ..styles) = presentate.slide(
   {

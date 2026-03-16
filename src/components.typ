@@ -1,27 +1,29 @@
 #import "dependencies.typ": *
 #import "utils.typ"
+#import "stylish/core.typ" as sty: element, select, set-element, show-element, get-fields
 
 #let prefix = "busyslide:" + toml("../typst.toml").package.version
+#let (element, select, set-element, show-element) = sty.setup(prefix)
 
-#let tag(name) = std.label(prefix + "_" + name)
+// #let tag(name) = std.label(prefix + "_" + name)
 
-#let element(
-  body,
-  class: none,
-  id: none,
-  label: none,
-) = {
-  let seq = [].func()
-  if label != none { body = [#body#std.label(label)] }
-  if type(class) != array { class = (class,) }
-  for c in class {
-    body = [#seq((body,))#tag(c)]
-    body = [#seq((body,))#tag(c + "." + id)]
-  }
-  return body
-}
+// #let element(
+//   body,
+//   class: none,
+//   id: none,
+//   label: none,
+// ) = {
+//   let seq = [].func()
+//   if label != none { body = [#body#std.label(label)] }
+//   if type(class) != array { class = (class,) }
+//   for c in class {
+//     body = [#seq((body,))#tag(c)]
+//     body = [#seq((body,))#tag(c + "." + id)]
+//   }
+//   return body
+// }
 
-#let select(identifier) = selector(tag(identifier))
+// #let select(identifier) = selector(tag(identifier))
 
 #let slide-title(title) = {
   if title == none { return none }
