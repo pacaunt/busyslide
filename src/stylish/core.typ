@@ -22,16 +22,27 @@
 ) = {
   assert(prefix != none, message: "A uniquw prefix must be specified.")
 
-  let family-id = if family != none { (family.parent, class).join(".") } else { class }
   let info = (
     kind: prefix + "_" + element-kind,
     display: display,
     fields: fields,
     class: class,
-    id: id,
+    id: "#" + id,
     label: label,
-    parent: family-id,
   )
+
+  let family-class 
+  let family-id
+
+  if family != none {
+    family-class = (family.parent, class).join(".")
+    family-id = (family.parent-id, class).join(".")
+    info.parent = family-class
+    info.parent-id = family-id
+  } else {
+    info.parent = info.class
+    info.parent-id = info.id
+  }
 
   let sequence = [].func()
 
@@ -58,7 +69,7 @@
     context display(resolved-info)
   }
 
-  for name in (label, class, family-id, id) {
+  for name in (info.label, info.class, info.id, family-class, family-id,) {
     if name != none {
       name = prefix + "_" + name
       body = [#sequence((body, metadata(resolve-info)))#std.label(name)]
@@ -130,6 +141,23 @@
 //         )
 //     ]
 //   },
+// )
+// #show select("#apple-box"): set text(fill: green)
+// #show select("#apple-box.cherry"): set text(fill: blue)
+
+// #element(
+//   class: "container", 
+//   id: "apple-box", 
+//   self => {
+//     [
+//       HELLO 
+//       - #element(
+//         class: "cherry", 
+//         family: self, 
+//         [CHERRY]
+//       )
+//     ]
+//   }
 // )
 
 // #element(class: "child", [ANOTHER CHILD])
