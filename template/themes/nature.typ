@@ -3,7 +3,7 @@
 
 #let title-slide(info: info) = general-title-slide({
   import components: *
-  arrange(column-width: 1fr, gutter: 2cm)[
+  arrange[
     #element(none, class: "decorator-rect")
     #v(1fr)
     #presentation-title(title())
@@ -24,7 +24,9 @@
   set text(size: 20pt, font: info.main-font, fill: info.palette.dark)
   show math.equation: set text(font: info.math-font)
 
+  show select("title-slide.description"): set text(bottom-edge: "bounds", fill: red)
   show select("title-slide"): it => {
+    show: set-element("arrange", column-width: 1fr, gutter: 2cm)
     show select("decorator-rect"): it => {
       place(top + left, rect(
         fill: info.palette.primary,

@@ -18,9 +18,11 @@
   class: none,
   id: none,
   label: none,
+  family: none, // accepted as info
 ) = {
   assert(prefix != none, message: "A uniquw prefix must be specified.")
 
+  let family-id = if family != none { (family.parent, class).join(".") } else { class }
   let info = (
     kind: prefix + "_" + element-kind,
     display: display,
@@ -28,10 +30,10 @@
     class: class,
     id: id,
     label: label,
+    parent: family-id,
   )
 
   let sequence = [].func()
-  let protect-label = prefix + "_protected" // prevent sequence collapsing
 
   if type(display) != function { display = it => display }
 
@@ -53,17 +55,17 @@
     let resolved-info = resolve-info()
     set ellipse(resolved-info.original)
     // protect the ellipse
-    context display(resolved-info.fields)
+    context display(resolved-info)
   }
 
-  for name in (label, class, id, protect-label) {
+  for name in (label, class, family-id, id) {
     if name != none {
       name = prefix + "_" + name
       body = [#sequence((body, metadata(resolve-info)))#std.label(name)]
     }
   }
-
-  body
+  // This context protects the body from sequence join.
+  context body
 }
 
 #let select(identifier, prefix: none) = label(prefix + "_" + identifier)
@@ -112,7 +114,25 @@
 
 // usage
 
-// #let (element, select, set-element, show-element) = setup("mypackage:0.1.0")
+#let (element, select, set-element, show-element) = setup("mypackage:0.1.0")
+
+// #show select("parent.child"): set text(fill: red)
+// #show select("child"): strong
+// #element(
+//   class: "parent",
+//   it => {
+//     [
+//       PARENT
+//       - #element(
+//           class: "child",
+//           family: it,
+//           [CHILD],
+//         )
+//     ]
+//   },
+// )
+
+// #element(class: "child", [ANOTHER CHILD])
 
 // #show select("hello-text"): set text(fill: red)
 

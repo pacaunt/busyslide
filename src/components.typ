@@ -1,29 +1,9 @@
 #import "dependencies.typ": *
 #import "utils.typ"
-#import "stylish/core.typ" as sty: element, select, set-element, show-element, get-fields
+#import "stylish/core.typ" as sty: element, get-fields, select, set-element, show-element
 
 #let prefix = "busyslide:" + toml("../typst.toml").package.version
 #let (element, select, set-element, show-element) = sty.setup(prefix)
-
-// #let tag(name) = std.label(prefix + "_" + name)
-
-// #let element(
-//   body,
-//   class: none,
-//   id: none,
-//   label: none,
-// ) = {
-//   let seq = [].func()
-//   if label != none { body = [#body#std.label(label)] }
-//   if type(class) != array { class = (class,) }
-//   for c in class {
-//     body = [#seq((body,))#tag(c)]
-//     body = [#seq((body,))#tag(c + "." + id)]
-//   }
-//   return body
-// }
-
-// #let select(identifier) = selector(tag(identifier))
 
 #let slide-title(title) = {
   if title == none { return none }
@@ -45,25 +25,37 @@
 #let presentation-author(body) = element(class: "author", body)
 #let presentation-date(body) = element(class: "date", body)
 
-#let arrange(..bodies, dir: ltr, column-width: auto) = {
-  let styles = bodies.named()
-  let bodies = bodies.pos()
-  let n = bodies.len()
-  let resolve-column-width(n, width) = {
-    if type(width) != array { width = (width,) }
-    let more-number = n - width.len()
-    for i in range(more-number) {
-      width += (width.at(calc.rem(i, width.len())),)
+#let arrange(..bodies, dir: ltr, column-width: auto) = element(
+  class: "arrange",
+  fields: (
+    bodies: bodies.pos(),
+    ..bodies.named(),
+    dir: dir,
+    column-width: column-width,
+  ),
+  it => {
+    let fields = it.fields
+    let bodies = fields.remove("bodies")
+    let column-width = fields.remove("column-width")
+    let dir = fields.remove("dir")
+    let styles = fields // left-over arguments
+    let n = bodies.len()
+    let resolve-column-width(n, width) = {
+      if type(width) != array { width = (width,) }
+      let more-number = n - width.len()
+      for i in range(more-number) {
+        width += (width.at(calc.rem(i, width.len())),)
+      }
+      return width
     }
-    return width
-  }
-  let default-layout(..args) = grid(..args, ..bodies, gutter: 1em, ..styles)
+    let default-layout(..args) = grid(..args, ..bodies, gutter: 1em, ..styles)
 
-  if dir == ltr {
-    default-layout(columns: resolve-column-width(n, column-width))
-  } else if dir == ttb {
-    default-layout()
-  } else {
-    panic("Directions supported are ttb and rtl.")
-  }
-}
+    if dir == ltr {
+      default-layout(columns: resolve-column-width(n, column-width))
+    } else if dir == ttb {
+      default-layout()
+    } else {
+      panic("Directions supported are ttb and rtl.")
+    }
+  },
+)
