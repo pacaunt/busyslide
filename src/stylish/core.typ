@@ -5,7 +5,6 @@
 #let is-element(prefix: none, meta-info) = {
   if type(meta-info) != content or meta-info.func() != metadata { return false }
   let info = meta-info.value
-  // panic(info)
   (
     type(info) == dictionary and "kind" in info and info.kind == prefix + "_" + element-kind
   )
@@ -125,7 +124,7 @@
 
 // usage
 
-#let (element, select, set-element, show-element) = setup("mypackage:0.1.0")
+// #let (element, select, set-element, show-element) = setup("mypackage:0.1.0")
 
 // #show select("parent.child"): set text(fill: red)
 // #show select("child"): strong

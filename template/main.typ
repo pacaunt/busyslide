@@ -1,4 +1,4 @@
-#import "themes/nature.typ": * 
+#import "themes/clean.typ": * 
 
 #let mock-image = block.with(width: 100%, height: 1fr, fill: gray.lighten(50%))
 

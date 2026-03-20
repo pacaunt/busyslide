@@ -15,7 +15,7 @@
   date: datetime.today().display("[Month repr:long] [year]"),
   image: block(width: 100%, height: 100%, fill: luma(230)),
   palette: (
-    primary: teal.mix(luma(20)),
+    primary: teal.mix(luma(50)),
     secondary: teal.mix(luma(200)),
     light: gray,
     accent: orange,
@@ -26,6 +26,7 @@
   progressive-outline-args: (
     separator: "  >  ",
   ),
+  handout: true,
 )
 
 #let bond-wrapper(func) = (..args) => {

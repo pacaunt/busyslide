@@ -49,5 +49,6 @@
 
   show select("title-slide"): set page(header: none, footer: none)
   show select("transition-slide"): set page(header: none, footer: none)
+  presentate.set-options(handout: info.handout)
   body
 }
