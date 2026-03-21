@@ -5,12 +5,12 @@
 #let prefix = "busyslide:" + toml("../typst.toml").package.version
 #let (element, select, set-element, show-element) = sty.setup(prefix)
 
-#let slide-title(title, level: 3) = element(
+#let slide-title(title, level: 3, cont: false, cont-display: " (cont.)") = element(
   fields: (
     body: title,
     level: level,
-    cont: false,
-    cont-display: "(cont.)",
+    cont: cont,
+    cont-display: cont-display,
   ),
   class: "slide-title",
   it => {
@@ -18,7 +18,7 @@
     if fields.body == none { return none }
     if fields.body != auto {
       if fields.cont {
-        fields.body += [ ] + fields.cont-display
+        fields.body += fields.cont-display
       }
       return block(fields.body)
     }

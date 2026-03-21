@@ -1,10 +1,10 @@
 #import "dependencies.typ": *
 #import "components.typ": element, select, slide-title
 
-#let general-slide(title: auto, body, ..styles) = context {
+#let general-slide(title: auto, body, ..styles, cont: false) = context {
   presentate.slide(
     {
-      slide-title(title)
+      slide-title(title, cont: cont)
       element(body, class: "slide-body")
     },
     ..styles,

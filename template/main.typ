@@ -1,4 +1,4 @@
-#import "themes/clean.typ": * 
+#import "themes/clean.typ": *
 
 #let mock-image = block.with(width: 100%, height: 1fr, fill: gray.lighten(50%))
 
@@ -14,7 +14,7 @@
 === Here is the title
 
 #slide[
-    Slide title can be created by using the level-3 heading.
+  Slide title can be created by using the level-3 heading.
 ]
 
 = Layouts
@@ -24,61 +24,66 @@
 === Blank Slide
 
 #slide[
-    #lorem(50)
+  #lorem(50)
 ]
 
-== side-image 
+== side-image
 
 === Side Image Slide
 #side-image-slide[
-    #lorem(50)
-    #tc1[Some Text]
-    #tc2[Another Text]
+  #lorem(50)
+  #tc1[Some Text]
+  #tc2[Another Text]
 ][
-    #mock-image()
+  #mock-image()
 ]
 
-= Animations 
+= Animations
 
 == Alert form
 #slide[
-    A Good Presentation #alert(auto)[starts here].
+  A Good Presentation #alert(auto)[starts here].
 ]
 
-== Mannot 
+== Mannot
 
-=== Integration with Mannot 
+=== Integration with Mannot
 
 #slide[
-    #import "@preview/mannot:0.3.2": *
-    #show: pause 
-    $ a^2 + b^2 = markhl(c^2) $
+  #import "@preview/mannot:0.3.2": *
+  #show: pause
+  $ a^2 + b^2 = markhl(c^2) $
 
-    Highlight 
-    $
-      mathrect(integral_0^oo e^(-x^2) dif x &= sqrt(pi)/2)
-    $
+  Highlight
+  $
+    mathrect(integral_0^oo e^(-x^2) dif x &= sqrt(pi)/2)
+  $
 ]
 
-#slide[
+#[
+  #show: set-element("slide-title", cont: true, cont-display: " (cont.)")
+
+  #slide[
     Anothe Slide #show: pause;
     Hello
+  ]
+
 ]
 
-== Alchemist 
+== Alchemist
 
 === Integration with Alchemist
 #slide[
-    #skeletize({
-        single(1)
-        fragment("CH_3")
-        single(-1)
-    })
+  #skeletize({
+    single(1)
+    fragment("CH_3")
+    single(-1)
+  })
 ]
 
 
 = Last Section
 
 #slide[
- 
+
 ]
