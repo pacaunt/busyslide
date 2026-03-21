@@ -1,13 +1,15 @@
 #import "dependencies.typ": *
-#import "components.typ": element, slide-title, select
+#import "components.typ": element, select, slide-title
 
-#let general-slide(title: auto, body, ..styles) = presentate.slide(
-  {
-    element(context slide-title(title), class: "slide-title")
-    element(body, class: "slide-body")
-  },
-  ..styles,
-)
+#let general-slide(title: auto, body, ..styles) = context {
+  presentate.slide(
+    {
+      slide-title(title)
+      element(body, class: "slide-body")
+    },
+    ..styles,
+  )
+}
 
 #let transition-slide(body) = element(
   class: "transition-slide",
@@ -24,11 +26,11 @@
 )
 
 // #let slide(
-//   title: auto, 
+//   title: auto,
 //   layout: "blank",
-//   body, 
+//   body,
 //   ..styles
 // ) = element(
-//   class: "slide-layout-" + layout, 
+//   class: "slide-layout-" + layout,
 //   general-slide(title: title, body, ..styles)
 // )

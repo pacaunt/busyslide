@@ -11,13 +11,17 @@
 
 == Slide Title
 
+=== Here is the title
+
 #slide[
-    Slide title can be created by using the level-2 heading.
+    Slide title can be created by using the level-3 heading.
 ]
 
 = Layouts
 
 == blank
+
+=== Blank Slide
 
 #slide[
     #lorem(50)
@@ -25,6 +29,7 @@
 
 == side-image 
 
+=== Side Image Slide
 #side-image-slide[
     #lorem(50)
     #tc1[Some Text]
@@ -41,6 +46,9 @@
 ]
 
 == Mannot 
+
+=== Integration with Mannot 
+
 #slide[
     #import "@preview/mannot:0.3.2": *
     #show: pause 
@@ -50,12 +58,16 @@
     $
       mathrect(integral_0^oo e^(-x^2) dif x &= sqrt(pi)/2)
     $
+]
 
-    
+#slide[
+    Anothe Slide #show: pause;
+    Hello
 ]
 
 == Alchemist 
 
+=== Integration with Alchemist
 #slide[
     #skeletize({
         single(1)

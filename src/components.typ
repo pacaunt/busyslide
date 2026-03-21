@@ -5,20 +5,41 @@
 #let prefix = "busyslide:" + toml("../typst.toml").package.version
 #let (element, select, set-element, show-element) = sty.setup(prefix)
 
-#let slide-title(title) = {
-  if title == none { return none }
-  if title != auto { return title }
-  let headings = query(selector.or(heading.where(level: 1), heading.where(level: 2)).before(here()))
-  if headings == () or headings.last().level < 2 { return none }
+#let slide-title(title, level: 3) = element(
+  fields: (
+    body: title,
+    level: level,
+    cont: false,
+    cont-display: "(cont.)",
+  ),
+  class: "slide-title",
+  it => {
+    let fields = it.fields
+    if fields.body == none { return none }
+    if fields.body != auto {
+      if fields.cont {
+        fields.body += [ ] + fields.cont-display
+      }
+      return block(fields.body)
+    }
+    let headings = query(
+      selector
+        .or(
+          ..range(1, fields.level + 1).map(i => heading.where(level: i)),
+        )
+        .before(here()),
+    )
+    if headings == () or headings.last().level < fields.level { return none }
 
-  let number = if heading.numbering != none {
-    element(class: "slide-heading-number", counter(heading).display(heading.numbering))
-    element(class: "slide-heading-separator", [ ])
-  }
-  let title = headings.filter(h => h.level == 2).last().body
+    let number = if heading.numbering != none {
+      element(class: "slide-heading-number", counter(heading).display(heading.numbering))
+      element(class: "slide-heading-separator", [ ])
+    }
+    fields.body = headings.filter(h => h.level == fields.level).last().body + if fields.cont { fields.cont-display }
 
-  if number != none { stack(dir: ltr, number, title) } else { block(title) }
-}
+    if number != none { stack(dir: ltr, number, fields.body) } else { block(fields.body) }
+  },
+)
 
 #let presentation-title(body) = element(class: "title", body)
 #let presentation-description(body) = element(class: "description", body)

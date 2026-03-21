@@ -26,7 +26,7 @@
   progressive-outline-args: (
     separator: "  >  ",
   ),
-  handout: true,
+  handout: false,
 )
 
 #let bond-wrapper(func) = (..args) => {
